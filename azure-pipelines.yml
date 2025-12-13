@@ -1,0 +1,20 @@
+
+trigger:
+- main
+
+pool: Ashu-pool
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSource: 'spec'
+    versionSpec: '16.x'
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'npm run build'
