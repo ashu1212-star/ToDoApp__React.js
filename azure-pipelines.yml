@@ -11,10 +11,14 @@ steps:
     versionSpec: '16.x'
 
 - task: Npm@1
+  displayName: npm_install
   inputs:
     command: 'install'
+    workingDir: '$(System.DefaultWorkingDirectory)'
 
 - task: Npm@1
+  displayName: Build
   inputs:
     command: 'custom'
+    workingDir: '$(System.DefaultWorkingDirectory)'
     customCommand: 'npm run build'
