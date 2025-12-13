@@ -21,4 +21,4 @@ steps:
   inputs:
     command: 'custom'
     workingDir: '$(System.DefaultWorkingDirectory)'
-    customCommand: 'npm run build'
+    customCommand: 'run build'
