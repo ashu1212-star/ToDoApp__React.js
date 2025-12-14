@@ -24,6 +24,24 @@ jobs:
       script: |
         npx eslint .
 
+  - task: PowerShell@2
+    displayName: Yaml_Lint
+    continueOnError: true
+    inputs:
+      targetType: 'inline'
+      script: |
+        pip install --user yamllint
+        
+        yamllint (System.DefaultWorkingDirectory)
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        npm install -g stylelint
+         npm install -g stylelint-config-standard 
+        stylelint  $(System.DefaultWorkingDirectory)/src --config stylelint.config.mjs
+
 
 - job: Build_Artifacts
   dependsOn: Linting
