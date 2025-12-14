@@ -32,7 +32,7 @@ jobs:
       script: |
         pip install --user yamllint
         
-        yamllint (System.DefaultWorkingDirectory)
+        yamllint $(System.DefaultWorkingDirectory)
 
   - task: PowerShell@2
     displayName: Stylelint
