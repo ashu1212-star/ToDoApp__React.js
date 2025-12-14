@@ -7,11 +7,23 @@ jobs:
 - job: Linting
   displayName: Eslint
   steps:
+  
   - task: PowerShell@2
+    displayName: Install deps
+    inputs:
+      targetType: inline
+      script: |
+        npm ci
+        npm install --save-dev eslint eslint-config-xo
+
+  - task: PowerShell@2
+    displayName: ESLint
     continueOnError: true
     inputs:
-      targetType: 'inline'
-      script: 'npx eslint'
+      targetType: inline
+      script: |
+        npx eslint .
+
 
 - job: Build_Artifacts
   dependsOn: Linting
