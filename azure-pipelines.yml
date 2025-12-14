@@ -19,6 +19,7 @@ jobs:
 
 
 - job: Build_Artifacts
+  dependsOn: Linting
   steps:
   - task: NodeTool@0
     inputs:
