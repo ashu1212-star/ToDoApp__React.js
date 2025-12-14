@@ -3,35 +3,50 @@ trigger:
 - main
 
 pool: Ashu-pool
+jobs: 
+- job: Linting
+  displayName: Eslint
+  steps:
+  - task: PowerShell@2
+    continueOnError: true
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSource: 'spec'
-    versionSpec: '16.x'
+    inputs:
+      targetType: 'inline'
+      script: |
+        npm init @eslint/config@latest
+        npm init @eslint/config@latest -- --config eslint-config-xo
+        npx eslint
 
-- task: Npm@1
-  displayName: npm_install
-  inputs:
-    command: 'install'
-    workingDir: '$(System.DefaultWorkingDirectory)'
 
-- task: Npm@1
-  displayName: Build
-  inputs:
-    command: 'custom'
-    workingDir: '$(System.DefaultWorkingDirectory)'
-    customCommand: 'run build'
+- job: Build_Artifacts
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSource: 'spec'
+      versionSpec: '16.x'
 
-- task: CopyFiles@2
-  displayName: Copy build output to artifact staging
-  inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/build'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'    
+  - task: Npm@1
+    displayName: npm_install
+    inputs:
+      command: 'install'
+      workingDir: '$(System.DefaultWorkingDirectory)'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+  - task: Npm@1
+    displayName: Build
+    inputs:
+      command: 'custom'
+      workingDir: '$(System.DefaultWorkingDirectory)'
+      customCommand: 'run build'
+
+  - task: CopyFiles@2
+    displayName: Copy build output to artifact staging
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)/build'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'    
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container' 
