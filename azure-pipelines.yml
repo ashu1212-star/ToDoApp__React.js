@@ -23,6 +23,13 @@ steps:
     workingDir: '$(System.DefaultWorkingDirectory)'
     customCommand: 'run build'
 
+- task: CopyFiles@2
+  displayName: Copy build output to artifact staging
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)/build'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'    
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
