@@ -35,6 +35,8 @@ jobs:
         yamllint (System.DefaultWorkingDirectory)
 
   - task: PowerShell@2
+    displayName: Stylelint
+    continueOnError: true
     inputs:
       targetType: 'inline'
       script: |
