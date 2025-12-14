@@ -9,14 +9,9 @@ jobs:
   steps:
   - task: PowerShell@2
     continueOnError: true
-
     inputs:
       targetType: 'inline'
-      script: |
-        npm init @eslint/config@latest
-        npm init @eslint/config@latest -- --config eslint-config-xo
-        npx eslint
-
+      script: 'npx eslint'
 
 - job: Build_Artifacts
   dependsOn: Linting
