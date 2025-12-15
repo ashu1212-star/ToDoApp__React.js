@@ -1,0 +1,7 @@
+organization=ashu2603
+projectKey=Ashu2603_ReactTodoUIMonolith.git
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.77563
+dashboardUrl=https://sonarcloud.io/dashboard?id=Ashu2603_ReactTodoUIMonolith.git
+ceTaskId=AZsjZ1y3SMv6GuMJkt8z
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZsjZ1y3SMv6GuMJkt8z
