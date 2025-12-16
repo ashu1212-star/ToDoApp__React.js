@@ -48,6 +48,14 @@ jobs:
 - job: Build_Artifacts
   dependsOn: Linting
   steps:
+
+  - task: SonarQubePrepare@8
+    inputs:
+      SonarQube: 'SonarSVC'
+      scannerMode: 'cli'
+      configMode: 'manual'
+      cliProjectKey: 'TODO_INFRA_ReactTodoUIMonolith.git_7a2463bb-52f1-4c02-9f99-9b801c37ff9c'
+      cliSources: '.'
   - task: NodeTool@0
     inputs:
       versionSource: 'spec'
@@ -66,6 +74,10 @@ jobs:
       workingDir: '$(System.DefaultWorkingDirectory)'
       customCommand: 'run build'
 
+  - task: SonarQubeAnalyze@8
+    inputs:
+      jdkversion: 'JAVA_HOME_17_X64'
+
   - task: CopyFiles@2
     displayName: Copy build output to artifact staging
     inputs:
@@ -78,3 +90,7 @@ jobs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container' 
+
+  - task: SonarQubePublish@8
+    inputs:
+      pollingTimeoutSec: '300'
