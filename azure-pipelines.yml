@@ -5,7 +5,7 @@ trigger:
 pool: Ashu-pool
 jobs: 
 - job: Linting
-  displayName: Eslint
+  displayName: Linting
   steps:
   
   - task: PowerShell@2
