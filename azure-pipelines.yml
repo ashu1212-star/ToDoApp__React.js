@@ -48,7 +48,6 @@ jobs:
 - job: Build_Artifacts
   dependsOn: Linting
   steps:
-
   - task: SonarQubePrepare@8
     inputs:
       SonarQube: 'SonarSVC'
@@ -56,6 +55,7 @@ jobs:
       configMode: 'manual'
       cliProjectKey: 'TODO_INFRA_ReactTodoUIMonolith.git_7a2463bb-52f1-4c02-9f99-9b801c37ff9c'
       cliSources: '.'
+  
   - task: NodeTool@0
     inputs:
       versionSource: 'spec'
